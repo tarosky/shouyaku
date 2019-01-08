@@ -1,0 +1,17 @@
+
+
+//
+// Term Edit Screen.
+//
+.shouyaku-term{
+  &-editor{
+    label{
+      display: block;
+      margin: 1em 0;
+    }
+  }
+  &-description{
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
