@@ -5,6 +5,7 @@
  * @package $terms
  */
 
+defined( 'ABSPATH' ) || die();
 
 // Register i18n
 add_action( 'admin_init', function () {

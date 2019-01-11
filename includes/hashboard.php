@@ -5,6 +5,8 @@
  * @package shouyaku
  */
 
+defined( 'ABSPATH' ) || die();
+
 /**
  * Enable language.
  */

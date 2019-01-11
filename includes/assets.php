@@ -3,6 +3,7 @@
  * Asset related hooks.
  */
 
+defined( 'ABSPATH' ) || die();
 
 add_action( 'init', function() {
 	$asset_dir_url = plugin_dir_url( __DIR__ ) . 'assets';

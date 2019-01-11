@@ -3,6 +3,8 @@
  * Options related functions.
  */
 
+defined( 'ABSPATH' ) || die();
+
 // Admin init.
 add_action( 'admin_menu', function() {
 	add_options_page( __( 'Translation', 'shouyaku' ), __( 'Translation', 'shouyaku' ), 'manage_options', 'shouyaku-option', function() {
