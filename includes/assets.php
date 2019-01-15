@@ -12,4 +12,6 @@ add_action( 'init', function() {
 	] );
 	wp_register_style( 'shouyaku-admin', $asset_dir_url . '/css/shouyaku-admin.css', [], $header['version'] );
 	wp_register_script( 'shouyaku-term-editor', $asset_dir_url . '/js/shouyaku-term-editor.js', [ 'jquery' ], $header['version'], true );
+	
+	wp_register_script( 'shouyaku-post-selector', $asset_dir_url . '/js/shouyaku-post-locales.js', [ 'jquery', 'wp-element', 'wp-i18n' ], $header['version'], true );
 } );

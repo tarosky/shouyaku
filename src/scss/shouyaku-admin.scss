@@ -15,3 +15,68 @@
     width: 100%;
   }
 }
+
+.shouyaku-translations{
+
+  position: relative;
+  z-index: 1;
+
+  &-loading{
+    &:before{
+      z-index: 10;
+      position: absolute;
+      display: block;
+      content: "";
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: rgba( 255, 255, 255, .9 );
+    }
+    &:after{
+      z-index: 11;
+      position: absolute;
+      content: "\f463";
+      font-family: "Dashicons";
+      font-size: 25px;
+      display: block;
+      top: 50%;
+      left: 50%;
+      transform: translate( -50%, -50% );
+      color: #888;
+    }
+  }
+  &-add{
+    &:after{
+      content: "";
+      display: block;
+      height: 0;
+      clear: both;
+    }
+    &-btn {
+      $size: 28px;
+      float: right;
+      display: block;
+      width: $size;
+      height: $size;
+      line-height: $size;
+      border-radius: 50%;
+      border: 2px solid #0073aa;
+      text-align: right;
+      .dashicons{
+        line-height: $size;
+        height: $size;
+        width: $size;
+      }
+      &:link, &:visited{
+        text-decoration: none;
+      }
+    }
+    &-submit{
+      width: 100%;
+      display: block;
+      box-sizing: border-box;
+      margin-top: 10px !important;
+    }
+  }
+}

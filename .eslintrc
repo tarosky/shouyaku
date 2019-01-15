@@ -1,10 +1,21 @@
 {
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6,
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "env": {
-    "browser": true
+    "browser": true,
+    "jquery": true
   },
-  "extends": "wordpress"
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "wordpress",
+    "plugin:react/recommended"
+  ]
 }

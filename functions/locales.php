@@ -19,6 +19,23 @@ function shouyaku_get_locales() {
 }
 
 /**
+ * Get original locale.
+ *
+ * @param string $locale
+ *
+ * @return string
+ */
+function shouyaku_original_locale( $locale = '' ) {
+	static $original_locale;
+	if ( $locale ) {
+		$original_locale = $locale;
+	} elseif ( ! $original_locale ) {
+		$original_locale = get_locale();
+	}
+	return $original_locale;
+}
+
+/**
  * Get current user locale.
  *
  * @return string
