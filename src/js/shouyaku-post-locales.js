@@ -134,7 +134,7 @@ class LocaleList extends React.Component {
             }).map( ( post ) => {
               return (
                 <li className='shouyaku-translations-item'>
-                  <a key={post.id} className='shouyaku-translations-link' href={post.edit_link} target='_blank' rel='noopener noreferrer'>
+                  <a key={post.id} className='shouyaku-translations-link' href={post.edit_link}>
                     {post.title} ({post.locale})
                   </a>
                 </li>

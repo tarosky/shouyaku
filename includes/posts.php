@@ -31,6 +31,21 @@ add_action( 'init', function() {
 	register_post_type( shouyaku_translation_post_type(), $args );
 } );
 
+// Add post locale if user choose other language.
+add_action( 'wp_insert_post', function( $post_id, WP_Post $post, $update ) {
+	// Check if this post should be updated.
+	if ( $update || ! shouyaku_post_should_translate( $post ) ) {
+		return;
+	}
+	// Check user choose default locale.
+	$user_locale = get_user_locale( $post->post_author );
+	if ( shouyaku_original_locale() === $user_locale ) {
+		return;
+	}
+	// User selected other language, so apply it to post.
+	update_post_meta( $post_id, '_locale', $user_locale );
+}, 10, 3 );
+
 // Add admin column.
 add_action( 'admin_init', function() {
 	add_filter( 'manage_' . shouyaku_translation_post_type() . '_posts_columns', function( $columns ) {
@@ -64,12 +79,16 @@ add_action( 'admin_init', function() {
 // Add language meta box.
 add_action( 'add_meta_boxes', function( $post_type ) {
 	if ( shouyaku_translation_post_type() === $post_type ) {
-		add_meta_box( 'shouyaku-language', __( 'Language Setting', 'shouyaku' ), function( $post ) {
+		add_meta_box( 'shouyaku-language', __( 'Language Setting', 'shouyaku' ), function( WP_Post $post ) {
 			$locales = shouyaku_get_locales();
 			$locale = get_post_meta( $post->ID, '_locale', true );
 			?>
 			<p>
 				<?php echo wp_kses_post( sprintf( __( 'This translations is <strong>%1$s <small>(%2$s)</small></strong>', 'shouyaku' ), esc_html( $locales[ $locale ] ), esc_html( $locale ) ) ) ?>
+			</p>
+			<h4><?php esc_html_e( 'Original Post', 'shouyaku' ) ?></h4>
+			<p>
+				<a href="<?php echo get_edit_post_link( $post->post_parent ) ?>"><?php echo esc_html( get_the_title( $post->post_parent ) ) ?></a>
 			</p>
 			<?php
 		}, $post_type, 'side', 'high' );
@@ -77,7 +96,7 @@ add_action( 'add_meta_boxes', function( $post_type ) {
 	}
 	
 	if ( in_array( $post_type, shouyaku_transferable_post_types() ) ) {
-		add_meta_box( 'shouyaku-language', __( 'Language Setting', 'shouyaku' ), function( $post ) {
+		add_meta_box( 'shouyaku-language', __( 'Language Setting', 'shouyaku' ), function( WP_Post $post ) {
 			wp_enqueue_script( 'shouyaku-post-selector' );
 			wp_localize_script( 'shouyaku-post-selector', 'ShouyakuPostSelector', [
 				'nonce'          => wp_create_nonce( 'wp_rest' ),
