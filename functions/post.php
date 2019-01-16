@@ -109,3 +109,21 @@ function shouyaku_get_translations( $post = null, $locale = '', $status = 'publi
 	return apply_filters( 'shouyaku_get_translations', $posts, $post, $args, $locale );
 }
 
+/**
+ * Check if post is older than original.
+ *
+ * @param null|int|WP_Post $post
+ *
+ * @return bool
+ */
+function shouyaku_maybe_older_than_original( $post = null ) {
+	$post   = get_post( $post );
+	$parent = get_post( $post->post_parent );
+	if ( ! $post || ! $parent ) {
+		return false;
+	}
+	$duplicated        = get_post_meta( $post->ID, '_latest_copied', true );
+	$modified          = $post->post_modified_gmt;
+	$original_modified = $parent->post_date_gmt;
+	return ! ( $duplicated > $original_modified || $modified > $original_modified );
+}

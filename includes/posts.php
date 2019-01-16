@@ -11,7 +11,7 @@ add_action( 'init', function() {
 	$args = [
 		'label' => __( 'Translations', 'shouyaku' ),
 		'menu_icon'         => 'dashicons-translation',
-		'menu_position'     => 999,
+		'menu_position'     => 20,
 		'public'            => false,
 		'show_ui'           => true,
 		'supports'          => [ 'title', 'editor', 'excerpt' ],
@@ -53,8 +53,9 @@ add_action( 'admin_init', function() {
 		foreach ( $columns as $key => $label ) {
 			$new_column[ $key ] = $label;
 			if ( 'title' === $key ) {
-				$new_column[ 'parent' ] = __( 'Parent' );
+				$new_column[ 'translation_parent' ] = __( 'Parent' );
 				$new_column[ 'locale' ] = __( 'Language' );
+				$new_column[ 'status' ] = __( 'Status' );
 			}
 		}
 		return $new_column;
@@ -64,13 +65,20 @@ add_action( 'admin_init', function() {
 			case 'locale':
 				echo esc_html( get_post_meta( $post_id, '_locale', true ) );
 				break;
-			case 'parent':
+			case 'translation_parent':
 				$parent = wp_get_post_parent_id( $post_id );
 				printf(
 					'<a href="%s">%s</a>',
 					esc_url( get_edit_post_link( $parent ) ),
 					esc_html( get_the_title( $parent ) )
 				);
+				break;
+			case 'status':
+				if ( shouyaku_maybe_older_than_original( $post_id ) ) {
+					printf( '<span class="dashicons dashicons-no" style="color: red;"></span> %s', esc_html__( 'Maybe Old', 'shouyaku' ) );
+				} else {
+					printf( '<span class="dashicons dashicons-yes" style="color: green;"></span> %s', esc_html__( 'Up to date', 'shouyaku' ) );
+				}
 				break;
 		}
 	}, 10, 2 );
@@ -89,6 +97,25 @@ add_action( 'add_meta_boxes', function( $post_type ) {
 			<h4><?php esc_html_e( 'Original Post', 'shouyaku' ) ?></h4>
 			<p>
 				<a href="<?php echo get_edit_post_link( $post->post_parent ) ?>"><?php echo esc_html( get_the_title( $post->post_parent ) ) ?></a>
+			</p>
+			<h4><?php esc_html_e( 'Duplicated Time', 'shouyaku' ) ?></h4>
+			<p>
+				<?php
+				$duplicated        = get_post_meta( $post->ID, '_latest_copied', true );
+				$modified          = $post->post_modified_gmt;
+				$original_modified = get_post( $post->post_parent )->post_date_gmt;
+				echo wp_kses_post( sprintf( __( 'this post has been duplicated at <code>%s</code>.', 'shouyaku' ), mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $duplicated ) ) );
+				?>
+			</p>
+			<p>
+				<?php $original_modified_formatted =  mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $original_modified ); ?>
+				<?php if ( shouyaku_maybe_older_than_original( $post ) ) : ?>
+					<span class="dashicons dashicons-no" style="color: red"></span>
+					<?php echo wp_kses_post( sprintf( __( 'Original post has been modified at <code>%s</code> and it might be newer than this post.', 'shouyaku' ), $original_modified_formatted ) ); ?>
+				<?php else : ?>
+					<span class="dashicons dashicons-yes" style="color:green"></span>
+					<?php echo wp_kses_post( sprintf( __( 'This post is newer than original modified at <code>%s</code>.', 'shouyaku' ), $original_modified_formatted ) ); ?>
+				<?php endif; ?>
 			</p>
 			<?php
 		}, $post_type, 'side', 'high' );
@@ -233,6 +260,8 @@ add_action( 'rest_api_init', function() {
 				}
 				// Save locale.
 				update_post_meta( $translation_id, '_locale', $locale );
+				// Save time.
+				update_post_meta( $translation_id, '_latest_copied', current_time( 'mysql', true ) );
 				// If locale is specified, copy them.
 				$meta_to_copy = apply_filters( 'shouyaku_meta_keys_to_copy', [], $post, $locale );
 				foreach ( $meta_to_copy as $key ) {
