@@ -36,6 +36,24 @@ function shouyaku_post_should_translate( $post = null ) {
 }
 
 /**
+ * @param null $post
+ *
+ * @return array|WP_Post|null
+ */
+function shouyaku_get_post_translation( $post = null ) {
+	$post = get_post( $post );
+	if ( ! shouyaku_post_should_translate( $post ) ) {
+		return null;
+	} elseif ( ( $locale = shouyaku_should_translate_to() ) ) {
+		// Post title should be translated.
+		foreach ( shouyaku_get_translations( $post, $locale ) as $translate ) {
+			return $translate;
+		}
+	}
+	return null;
+}
+
+/**
  * Get post author's locale.
  *
  * @param null|int|WP_Post $post
@@ -77,21 +95,32 @@ function shouyaku_post_has_locale( $locale = '', $post = null, $status = 'any' )
 /**
  * Get translated posts.
  *
- * @param null|int|WP_Post $post
- * @param string           $locale   If set, include only a post in specified locale.
- * @param string|array     $status   Post status in array or string.
- * @param int[]            $excludes If set, exludes specified post ids.
+ * @param null|int|WP_Post|WP_Post[] $post
+ * @param string                     $locale   If set, include only a post in specified locale.
+ * @param string|array               $status   Post status in array or string.
+ * @param int[]                      $excludes If set, exludes specified post ids.
  *
  * @return WP_Post[]
  */
 function shouyaku_get_translations( $post = null, $locale = '', $status = 'publish', $excludes = [] ) {
-	$post = get_post( $post );
 	$args = [
 		'post_type'      => shouyaku_translation_post_type(),
-		'post_parent'    => $post->ID,
 		'posts_per_page' => -1,
 		'post_status'    => $status,
 	];
+	if ( is_array( $post ) ) {
+		$parent_ids = array_filter( array_map( function( $p ) {
+			return shouyaku_post_should_translate( $p ) ? $p->ID : 0;
+		}, $post ) );
+		if ( $parent_ids ) {
+			$args['post_parent__in'] = $parent_ids;
+		} else {
+			$args['p'] = 0;
+		}
+	} else {
+		$post = get_post( $post );
+		$args['post_parent'] = $post->ID;
+	}
 	if ( $excludes ) {
 		$args['post__not_in'] = $excludes;
 	}

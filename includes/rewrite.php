@@ -20,3 +20,5 @@ add_action( 'pre_get_posts', function( WP_Query &$wp_query ) {
 	
 	}
 } );
+
+

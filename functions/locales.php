@@ -64,4 +64,36 @@ function shouyaku_should_change_locale() {
 	return $should_change;
 }
 
+/**
+ * Detect if post should be translated.
+ *
+ * @return string
+ */
+function shouyaku_should_translate_to() {
+	$locale        = '';
+	$orig_locale = shouyaku_original_locale();
+	$user_locale   = shouyaku_user_locale();
+	
+	if ( ( $query_lang = get_query_var( 'locale' ) ) && array_key_exists( $query_lang, shouyaku_get_locales() ) ) {
+		// Check global flag.
+		$locale = $query_lang;
+	} elseif ( is_user_logged_in() ) {
+		$locale = $user_locale;
+	}
+	return $locale;
+}
 
+/**
+ *
+ *
+ * @param string $to_locale
+ *
+ * @return string
+ */
+function shouyaku_page_translated( $to_locale = '' ) {
+	static $translated_to = '';
+	if ( $to_locale ) {
+		$translated_to = $to_locale;
+	}
+	return $translated_to;
+}

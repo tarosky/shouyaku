@@ -278,3 +278,112 @@ add_action( 'rest_api_init', function() {
 		],
 	] );
 } );
+
+/**
+ * Filter posts to add translations.
+ *
+ * @param WP_Post[] $posts
+ * @param WP_Query $wp_query
+ * @return WP_Post[]
+ */
+function shouyaku_change_post_results( $posts, $wp_query ) {
+	if ( is_admin() ) {
+		return $posts;
+	}
+	$locale = shouyaku_should_translate_to();
+	if ( ! $locale ) {
+		return $posts;
+	}
+	$translations = shouyaku_get_translations( $posts, $locale );
+	foreach ( shouyaku_get_translations( $posts, $locale ) as $translation ) {
+		foreach ( $posts as $index => $post ) {
+			if ( $post->ID == $translation->post_parent ) {
+				// Post is translated.
+				// Main query.
+				if ( $wp_query->is_main_query() ) {
+					shouyaku_page_translated( $locale );
+				}
+				foreach ( [ 'post_title', 'post_excerpt', 'post_content' ] as $param ) {
+					if ( $translation->{$param} ) {
+						$posts[ $index ]->{$param} = $translation->{$param};
+					}
+				}
+				break;
+			}
+		}
+	}
+	return $posts;
+}
+add_filter( 'posts_results', 'shouyaku_change_post_results', 10, 2 );
+
+// Translate title tag.
+add_filter( 'single_post_title', function( $title, $post ) {
+	if ( $translation = shouyaku_get_post_translation( $post ) ) {
+		$title = get_the_title( $translation );
+	}
+	return $title;
+}, 10, 2 );
+
+/**
+ * Change lang attribute.
+ */
+add_filter( 'language_attributes', function ( $output, $doctype ) {
+	if ( is_singular() || is_page() ) {
+		if ( $locale = shouyaku_page_translated() ) {
+			$new_locale = $locale;
+		} else {
+			$new_locale = get_post_meta( get_queried_object_id(), '_locale', true ) ?: shouyaku_original_locale();
+		}
+		$new_locale = str_replace( '_', '-', $new_locale );
+		$output = preg_replace( '/lang="[^"]+"/u', sprintf( 'lang="%s"', esc_attr( $new_locale ) ), $output );
+	}
+	return $output;
+}, 10, 2 );
+
+/**
+ * Add hreflang.
+ */
+add_action( 'wp_head', function() {
+	if ( is_singular() || is_page() ) {
+		$locales = [];
+		// Get translations.
+		$original = get_post_meta( get_queried_object_id(), '_locale', true ) ?: shouyaku_original_locale();
+		$permalink = get_permalink( get_queried_object() );
+		$locales[ $original ] = $permalink;
+		foreach ( shouyaku_get_translations( get_queried_object() ) as $translation ) {
+			$locale = get_post_meta( $translation->ID, '_locale', true );
+			$locales[ $locale ] = add_query_arg( [
+				'locale' => $locale,
+			], $permalink );
+		}
+		foreach ( $locales as $locale => $url ) {
+			printf( '<link rel="alternate" href="%s" hreflang="%s" />', esc_url( $url ), esc_attr( str_replace( '_', '-', $locale ) ) );
+		}
+	}
+}, 99 );
+
+/**
+ * Trim words by character locale.
+ */
+add_filter( 'wp_trim_words', function( $text, $num_words, $more, $original_text ) {
+	// If trimmed text seemed to be hang letter,
+	$original_text = wp_strip_all_tags( $original_text );
+	if ( \Tarosky\Shouyaku\Unicode::is_cjk( $original_text ) ) {
+		$text = trim( preg_replace( "/[\n\r\t ]+/", ' ', $original_text ), ' ' );
+		preg_match_all( '/./u', $text, $words_array );
+		$words_array = array_slice( $words_array[0], 0, $num_words + 1 );
+		$sep = '';
+	} else {
+		$words_array = preg_split( "/[\n\r\t ]+/", $original_text, $num_words + 1, PREG_SPLIT_NO_EMPTY );
+		$sep = ' ';
+	}
+	
+	if ( count( $words_array ) > $num_words ) {
+		array_pop( $words_array );
+		$text = implode( $sep, $words_array );
+		$text = $text . $more;
+	} else {
+		$text = implode( $sep, $words_array );
+	}
+	return $text;
+}, 10, 4 );
