@@ -42,8 +42,12 @@ function shouyaku_original_locale( $locale = '' ) {
  */
 function shouyaku_user_locale() {
 	if ( ! is_user_logged_in() ) {
-		// TODO: user language.
-		return get_locale();
+		// Check user cookie.
+		if ( isset( $_COOKIE['locale'] ) ) {
+			return str_replace( '-', '_', $_COOKIE['locale'] );
+		} else {
+			return get_locale();
+		}
 	} else {
 		return get_user_locale();
 	}
@@ -72,7 +76,7 @@ function shouyaku_should_change_locale() {
 function shouyaku_should_translate_to() {
 	$locale        = '';
 	$orig_locale = shouyaku_original_locale();
-	$user_locale   = shouyaku_user_locale();
+	$user_locale = shouyaku_user_locale();
 	
 	if ( ( $query_lang = get_query_var( 'locale' ) ) && array_key_exists( $query_lang, shouyaku_get_locales() ) ) {
 		// Check global flag.
