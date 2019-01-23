@@ -1,0 +1,218 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2019-01-23 15:53+0900\n"
+"PO-Revision-Date: 2019-01-23 16:01+0900\n"
+"Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"Language-Team: \n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: functions/post.php:187
+msgid "Sorry, but this post has no translation in your language."
+msgstr "申し訳ございません、この投稿にはご利用の言語の翻訳がありません。"
+
+#: includes/options.php:10 includes/posts.php:22
+msgid "Translation"
+msgstr "翻訳"
+
+#: includes/options.php:13
+msgid "Site Translation"
+msgstr "サイト翻訳"
+
+#: includes/options.php:44
+#, php-format
+msgid "Site Title in %s"
+msgstr "%sのサイトタイトル"
+
+#: includes/options.php:45
+#, php-format
+msgid "Tagline in %s"
+msgstr "%sのタグライン"
+
+#: includes/options.php:46
+#, php-format
+msgid "Date format in %s"
+msgstr "%sの日付書式"
+
+#: includes/options.php:47
+#, php-format
+msgid "Time format in %s"
+msgstr "%sの時間書式"
+
+#: includes/options.php:57
+#, php-format
+msgid "Original Value: <code>%s</code>"
+msgstr "元の値: <code>%s</code>"
+
+#: includes/posts.php:12 includes/posts.php:148 includes/terms.php:32
+msgid "Translations"
+msgstr "翻訳"
+
+#: includes/posts.php:56
+msgid "Parent"
+msgstr "親"
+
+#: includes/posts.php:57 includes/theme.php:67
+msgid "Language"
+msgstr "言語"
+
+#: includes/posts.php:58
+msgid "Status"
+msgstr "ステータス"
+
+#: includes/posts.php:78
+msgid "Maybe Old"
+msgstr "古いかも"
+
+#: includes/posts.php:80
+msgid "Up to date"
+msgstr "最新"
+
+#: includes/posts.php:90 includes/posts.php:126 includes/woocommerce.php:19
+msgid "Language Setting"
+msgstr "言語設定"
+
+#: includes/posts.php:95
+#, php-format
+msgid "This translations is <strong>%1$s <small>(%2$s)</small></strong>"
+msgstr "この翻訳は<strong>%1$s <small>(%2$s)</small></strong>です"
+
+#: includes/posts.php:97
+msgid "Original Post"
+msgstr "元の投稿"
+
+#: includes/posts.php:101
+msgid "Duplicated Time"
+msgstr "複製した日時"
+
+#: includes/posts.php:107
+#, php-format
+msgid "this post has been duplicated at <code>%s</code>."
+msgstr "この投稿は <code>%s</code> に複製されました。"
+
+#: includes/posts.php:114
+#, php-format
+msgid ""
+"Original post has been modified at <code>%s</code> and it might be newer "
+"than this post."
+msgstr ""
+"元の投稿が <code>%s</code> に更新されたため、この投稿より新しくなっている"
+"かもしれません。"
+
+#: includes/posts.php:117
+#, php-format
+msgid "This post is newer than original modified at <code>%s</code>."
+msgstr "この投稿<code>%s</code>に更新された元の投稿よりも新しいです。"
+
+#: includes/posts.php:139
+msgid "Locale of this post"
+msgstr "この投稿の言語"
+
+#: includes/posts.php:242
+#, php-format
+msgid "Translation in %s exists."
+msgstr "%s の翻訳が存在します。"
+
+#: includes/posts.php:272
+msgid "New translation added."
+msgstr "新しい翻訳が追加されました。"
+
+#: includes/terms.php:23
+#, php-format
+msgid "This term is ready for translation. Site Default is <code>%s</code>."
+msgstr ""
+"このタームは翻訳可能です。サイトのデフォルトは <code>%s</code> です。"
+
+#: includes/terms.php:44
+#, php-format
+msgid "<code>%s</code> is default language."
+msgstr "<code>%s</code> はデフォルトの言語です。"
+
+#: includes/terms.php:50
+#, php-format
+msgid "Name in %s"
+msgstr "%sでの名前"
+
+#: includes/terms.php:55
+#, php-format
+msgid "Description in %s"
+msgstr "%sでの説明文"
+
+#: includes/theme.php:58
+#, php-format
+msgid "You can change language setting at <a href=\"%s\">account page</a>."
+msgstr "<a href=\"%s\">アカウントページ</a>で言語設定を変更できます。"
+
+#: includes/theme.php:60
+msgid "Select your preferred language."
+msgstr "お好みの言語を選んでください。"
+
+#: includes/theme.php:113
+msgid "Your language setting is updated."
+msgstr "言語設定が更新されました。"
+
+#: includes/woocommerce.php:21
+msgid "Your prefered Language"
+msgstr "あなたのお好みの言語"
+
+#: src/js/shouyaku-post-locales.js:74
+msgid "Failed to get tranlsations."
+msgstr "翻訳の取得に失敗しました。"
+
+#: src/js/shouyaku-post-locales.js:110
+msgid "Failed to add new translation."
+msgstr "新しい翻訳を追加できませんでした。"
+
+#: src/js/shouyaku-post-locales.js:129
+msgid "This post has no translation."
+msgstr "この投稿には翻訳がありません。"
+
+#: src/js/shouyaku-post-locales.js:150
+msgid "Add translation"
+msgstr "翻訳を追加"
+
+#: src/js/shouyaku-post-locales.js:157
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/js/shouyaku-post-locales.js:161
+msgid "Select language"
+msgstr "言語を選択"
+
+#: src/js/shouyaku-post-locales.js:167
+msgid "Add Translation"
+msgstr "翻訳を追加"
+
+#: src/js/shouyaku-post-locales.js:169
+msgid "Select Language"
+msgstr "言語を選択"
+
+#: src/js/shouyaku-user-locale.js:111
+msgid "Failed to change locale."
+msgstr "言語の変更に失敗しました。"
+
+#. Plugin Name of the plugin/theme
+msgid "Shouyaku"
+msgstr "抄訳"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/tarosky/shouyaku"
+msgstr "https://github.com/tarosky/shouyaku"
+
+#. Description of the plugin/theme
+msgid "Yet another multilingual plugin."
+msgstr "もう一つの多言語プラグイン。"
+
+#. Author of the plugin/theme
+msgid "Kunoichi INC."
+msgstr "株式会社KUNOICHI"
+
+#. Author URI of the plugin/theme
+msgid "https://tarosky.co.jp"
+msgstr "https://tarosky.co.jp"

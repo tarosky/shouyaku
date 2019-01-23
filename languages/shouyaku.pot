@@ -1,0 +1,226 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Shouyaku\n"
+"POT-Creation-Date: 2019-01-23 15:53+0900\n"
+"PO-Revision-Date: 2019-01-23 14:50+0900\n"
+"Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"Language-Team: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: shouyaku.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: tests\n"
+"X-Poedit-SearchPathExcluded-3: assets\n"
+
+#: functions/post.php:187
+msgid "Sorry, but this post has no translation in your language."
+msgstr ""
+
+#: includes/options.php:10 includes/posts.php:22
+msgid "Translation"
+msgstr ""
+
+#: includes/options.php:13
+msgid "Site Translation"
+msgstr ""
+
+#: includes/options.php:44
+#, php-format
+msgid "Site Title in %s"
+msgstr ""
+
+#: includes/options.php:45
+#, php-format
+msgid "Tagline in %s"
+msgstr ""
+
+#: includes/options.php:46
+#, php-format
+msgid "Date format in %s"
+msgstr ""
+
+#: includes/options.php:47
+#, php-format
+msgid "Time format in %s"
+msgstr ""
+
+#: includes/options.php:57
+#, php-format
+msgid "Original Value: <code>%s</code>"
+msgstr ""
+
+#: includes/posts.php:12 includes/posts.php:148 includes/terms.php:32
+msgid "Translations"
+msgstr ""
+
+#: includes/posts.php:56
+msgid "Parent"
+msgstr ""
+
+#: includes/posts.php:57 includes/theme.php:67
+msgid "Language"
+msgstr ""
+
+#: includes/posts.php:58
+msgid "Status"
+msgstr ""
+
+#: includes/posts.php:78
+msgid "Maybe Old"
+msgstr ""
+
+#: includes/posts.php:80
+msgid "Up to date"
+msgstr ""
+
+#: includes/posts.php:90 includes/posts.php:126 includes/woocommerce.php:19
+msgid "Language Setting"
+msgstr ""
+
+#: includes/posts.php:95
+#, php-format
+msgid "This translations is <strong>%1$s <small>(%2$s)</small></strong>"
+msgstr ""
+
+#: includes/posts.php:97
+msgid "Original Post"
+msgstr ""
+
+#: includes/posts.php:101
+msgid "Duplicated Time"
+msgstr ""
+
+#: includes/posts.php:107
+#, php-format
+msgid "this post has been duplicated at <code>%s</code>."
+msgstr ""
+
+#: includes/posts.php:114
+#, php-format
+msgid ""
+"Original post has been modified at <code>%s</code> and it might be newer "
+"than this post."
+msgstr ""
+
+#: includes/posts.php:117
+#, php-format
+msgid "This post is newer than original modified at <code>%s</code>."
+msgstr ""
+
+#: includes/posts.php:139
+msgid "Locale of this post"
+msgstr ""
+
+#: includes/posts.php:242
+#, php-format
+msgid "Translation in %s exists."
+msgstr ""
+
+#: includes/posts.php:272
+msgid "New translation added."
+msgstr ""
+
+#: includes/terms.php:23
+#, php-format
+msgid "This term is ready for translation. Site Default is <code>%s</code>."
+msgstr ""
+
+#: includes/terms.php:44
+#, php-format
+msgid "<code>%s</code> is default language."
+msgstr ""
+
+#: includes/terms.php:50
+#, php-format
+msgid "Name in %s"
+msgstr ""
+
+#: includes/terms.php:55
+#, php-format
+msgid "Description in %s"
+msgstr ""
+
+#: includes/theme.php:58
+#, php-format
+msgid "You can change language setting at <a href=\"%s\">account page</a>."
+msgstr ""
+
+#: includes/theme.php:60
+msgid "Select your preferred language."
+msgstr ""
+
+#: includes/theme.php:113
+msgid "Your language setting is updated."
+msgstr ""
+
+#: includes/woocommerce.php:21
+msgid "Your prefered Language"
+msgstr ""
+
+#: src/js/shouyaku-post-locales.js:74
+msgid "Failed to get tranlsations."
+msgstr ""
+
+#: src/js/shouyaku-post-locales.js:110
+msgid "Failed to add new translation."
+msgstr ""
+
+#: src/js/shouyaku-post-locales.js:129
+msgid "This post has no translation."
+msgstr ""
+
+#: src/js/shouyaku-post-locales.js:150
+msgid "Add translation"
+msgstr ""
+
+#: src/js/shouyaku-post-locales.js:157
+msgid "Cancel"
+msgstr ""
+
+#: src/js/shouyaku-post-locales.js:161
+msgid "Select language"
+msgstr ""
+
+#: src/js/shouyaku-post-locales.js:167
+msgid "Add Translation"
+msgstr ""
+
+#: src/js/shouyaku-post-locales.js:169
+msgid "Select Language"
+msgstr ""
+
+#: src/js/shouyaku-user-locale.js:111
+msgid "Failed to change locale."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Shouyaku"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/tarosky/shouyaku"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Yet another multilingual plugin."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Kunoichi INC."
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://tarosky.co.jp"
+msgstr ""

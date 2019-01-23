@@ -88,8 +88,14 @@ function shouyaku_post_locale( $post = null ) {
  * @return bool
  */
 function shouyaku_post_has_locale( $locale = '', $post = null, $status = 'any' ) {
-	$posts = shouyaku_get_translations( $post, $locale, $status );
-	return (bool) $posts;
+	$post = get_post( $post );
+	if ( ! $locale || $locale == shouyaku_original_locale() ) {
+		$post_locale = get_post_meta( $post->ID, '_locale', true );
+		return ! $post_locale || $locale == $post_locale;
+	} else {
+		$posts = shouyaku_get_translations( $post, $locale, $status );
+		return (bool) $posts;
+	}
 }
 
 /**
