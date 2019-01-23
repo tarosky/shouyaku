@@ -14,7 +14,7 @@ add_action( 'init', function() {
 	} else {
 		// Check if cookie is set.
 		$locale = str_replace( '-', '_', isset( $_COOKIE['locale'] ) ? $_COOKIE['locale'] : '' );
-		if ( $locale && array_key_exists( $locale, shouyaku_get_locales() ) ) {
+		if ( $locale && shouyaku_available_locale( $locale ) ) {
 			shouyaku_original_locale();
 			switch_to_locale( $locale );
 		}

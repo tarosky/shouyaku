@@ -19,6 +19,17 @@ function shouyaku_get_locales() {
 }
 
 /**
+ * Detect if locale is available.
+ *
+ * @param string $locale
+ *
+ * @return bool
+ */
+function shouyaku_available_locale( $locale ) {
+	return array_key_exists( $locale, shouyaku_get_locales() );
+}
+
+/**
  * Get original locale.
  *
  * @param string $locale
@@ -77,11 +88,10 @@ function shouyaku_should_translate_to() {
 	$locale        = '';
 	$orig_locale = shouyaku_original_locale();
 	$user_locale = shouyaku_user_locale();
-	
-	if ( ( $query_lang = get_query_var( 'locale' ) ) && array_key_exists( $query_lang, shouyaku_get_locales() ) ) {
+	if ( ( $query_lang = get_query_var( 'locale' ) ) && shouyaku_available_locale( $query_lang ) ) {
 		// Check global flag.
 		$locale = $query_lang;
-	} elseif ( is_user_logged_in() ) {
+	} else {
 		$locale = $user_locale;
 	}
 	return $locale;

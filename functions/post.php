@@ -156,3 +156,36 @@ function shouyaku_maybe_older_than_original( $post = null ) {
 	$original_modified = $parent->post_date_gmt;
 	return ! ( $duplicated > $original_modified || $modified > $original_modified );
 }
+
+/**
+ * Display notification.
+ *
+ * @param null|int|WP_Post $post
+ */
+function shouyaku_post_notification( $post = null ) {
+	$post   = get_post( $post );
+	$locale = shouyaku_user_locale();
+	if ( ! in_array( $post->post_type, shouyaku_transferable_post_types() ) || shouyaku_post_has_locale( $locale, $post, 'publish' ) ) {
+		return;
+	}
+	$template = '';
+	foreach ( [
+		get_template_directory(),
+		get_stylesheet_directory(),
+	] as $dir ) {
+		$path = $dir . '/template-parts/alert-translation.php';
+		if ( file_exists( $path ) ) {
+			$template = $path;
+		}
+	}
+	$template = apply_filters( 'shouyaku_post_notification_template', $template, $post );
+	if ( $template && file_exists( $template ) ) {
+		include $template;
+	} else {
+		?>
+		<div class="mb-4 alert alert-warning shouyaku-alert-box">
+			<?php esc_html_e( 'Sorry, but this post has no translation in your language.', 'shouyaku' ) ?>
+		</div>
+		<?php
+	}
+}

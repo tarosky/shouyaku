@@ -86,9 +86,10 @@ const { __ } = wp.i18n;
     const $html           = $( 'html' );
     let cookieLocale      = getCookieLocale();
     let docLocale         = $html.attr( 'lang' );
-    let profileLocale     = $html.attr( 'data-profile-locale' ).replace( '_', '-' );
+    let profileLocale     = ( $html.attr( 'data-profile-locale' ) || '' ).replace( '_', '-' );
     let userLocale        = profileLocale || cookieLocale || getBrowserLocale();
     const shouldTranslate = localeToLang( userLocale ) !== localeToLang( docLocale );
+
     $html
       .attr( 'data-user-locale', userLocale );
     if ( shouldTranslate ) {
