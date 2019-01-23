@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2019-01-23 15:53+0900\n"
-"PO-Revision-Date: 2019-01-23 16:01+0900\n"
+"POT-Creation-Date: 2019-01-23 20:07+0900\n"
+"PO-Revision-Date: 2019-01-23 20:07+0900\n"
 "Last-Translator: Takahashi Fumiki <takahashi.fumiki@hametuha.co.jp>\n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -13,9 +13,19 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: functions/post.php:187
+#: app/Tarosky/Shouyaku/NavMenu.php:27
+#, php-format
+msgid "Navigation Label in %s"
+msgstr "%sのナビゲーションラベル"
+
+#: functions/post.php:193
 msgid "Sorry, but this post has no translation in your language."
 msgstr "申し訳ございません、この投稿にはご利用の言語の翻訳がありません。"
+
+#: includes/menu.php:65
+#, php-format
+msgid "Widget Title in %s"
+msgstr "%sのウィジェットタイトル"
 
 #: includes/options.php:10 includes/posts.php:22
 msgid "Translation"

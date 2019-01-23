@@ -5,7 +5,7 @@
  * Description: Yet another multilingual plugin.
  * Author: Kunoichi INC.
  * Author URI: https://tarosky.co.jp
- * Version: 0.0.0
+ * Version: 0.4.0
  * Text Domain: shouyaku
  * Domain Path: /languages/
  *
