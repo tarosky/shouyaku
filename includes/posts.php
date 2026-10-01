@@ -223,6 +223,8 @@ add_action( 'rest_api_init', function() {
 					];
 				}, $posts ) );
 			},
+			// Public endpoint. Non-authors only get published translations (see callback).
+			'permission_callback' => '__return_true',
 		],
 		[
 			'methods'  => 'POST',
